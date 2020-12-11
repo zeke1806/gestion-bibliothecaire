@@ -1,0 +1,9 @@
+type Livre {
+  # numLivre
+  id: ID!
+  design: String!
+  auteur: String!
+  dateEdition: String!
+  dispobible: Boolean!
+  nbPret: Int!
+}

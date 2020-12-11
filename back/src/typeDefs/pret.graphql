@@ -1,0 +1,4 @@
+type Pret {
+  livre: Livre!
+  datePret: String!
+}
