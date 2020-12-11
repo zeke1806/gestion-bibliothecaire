@@ -1,7 +1,9 @@
 import { IResolvers } from "graphql-tools";
+import { lecteurs } from "./lecteur/resolvers/lecteurs";
 import { addLecteur } from "./lecteur/resolvers/addLecteur";
 import { delLecteur } from "./lecteur/resolvers/delLecteur";
 import { updateLecteur } from "./lecteur/resolvers/updateLecteur";
+import { livres } from "./livre/resolvers/livres";
 import { addLivre } from "./livre/resolvers/addLivre"
 import { delLivre } from "./livre/resolvers/delLivre";
 import { updateLivre } from "./livre/resolvers/updateLivre";
@@ -17,6 +19,8 @@ const helloWorld = (): string => "Hello world";
 const resolverMap: IResolvers = {
   Query: {
     helloWorld,
+    livres,
+    lecteurs
   },
 
   Mutation: {
