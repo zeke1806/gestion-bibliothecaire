@@ -1,11 +1,12 @@
 import React, { FC } from "react";
-import { Button, View } from "react-native";
+import { Button, View, Text } from "react-native";
 import tailwind from "tailwind-rn";
 import themes from "../../theme";
 import { IFormLecteur, IFormLivre } from "../../types";
 import DatePicker from "../public/DatePicker";
 import MyTextInput from "../public/MyTextInput";
 import SectionTitle from "../public/SectionTitle";
+import Checkbox from "expo-checkbox";
 
 const FormLivre: FC<{
   type: "add" | "update";
@@ -30,6 +31,14 @@ const FormLivre: FC<{
           placeholder="Auteur"
           onChange={(text) => onChange("auteur", text)}
         />
+        <View style={tailwind("flex-row items-center pl-1 ml-1")}>
+          <Text>Disponible</Text>
+          <Checkbox
+            value={value.disponible}
+            onValueChange={(check) => onChange("disponible", String(check))}
+            //color={value.disponible ? "#4630EB" : undefined}
+          />
+        </View>
         <View style={tailwind("flex-row items-center")}>
           <View style={tailwind("flex-1")}>
             <DatePicker

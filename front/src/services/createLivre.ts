@@ -32,13 +32,10 @@ export const useCreateLivre = () => {
         " auteur: " +
         form.auteur +
         " " +
+        form.disponible +
+        " " +
         form.dateEdition
     );
-    setForm((draft) => {
-      draft.design = "";
-      draft.auteur = "";
-      draft.disponible = false;
-    });
   };
 
   return {
