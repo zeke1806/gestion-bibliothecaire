@@ -10,13 +10,13 @@ export class PretEntity {
   @Column({name: 'date_pret'})
   datePret: Date;
 
-  @ManyToOne(() => LecteurEntity)
+  @ManyToOne(() => LecteurEntity, { onDelete: 'CASCADE' })
   @JoinColumn({name: 'lecteur'})
   lecteur: LecteurEntity;
   @RelationId((pret: PretEntity) => pret.lecteur)
   lecteurId: number;
 
-  @ManyToOne(() => LivreEntity)
+  @ManyToOne(() => LivreEntity, { onDelete: 'CASCADE' })
   @JoinColumn({name: 'livre'})
   livre: LivreEntity
   @RelationId((pret: PretEntity) => pret.livre)
