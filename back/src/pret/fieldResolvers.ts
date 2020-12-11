@@ -8,7 +8,7 @@ const livre: LivreFR = async ({ id }) => {
   const pretService = new PretService();
   const livreService = new LivreService();
   const pret = (await pretService.getById(+id))!;
-  const livre = (await livreService.getById(pret.id))!;
+  const livre = (await livreService.getById(pret.livreId))!;
   return {
     id: livre.numLivre.toString(),
     design: livre.design,
