@@ -4,7 +4,7 @@ type Livre {
   design: String!
   auteur: String!
   dateEdition: String!
-  dispobible: Boolean!
+  disponible: Boolean!
   nbPret: Int
 }
 

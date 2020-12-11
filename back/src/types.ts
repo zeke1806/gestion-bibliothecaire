@@ -26,7 +26,7 @@ export type Livre = {
   design: Scalars['String'];
   auteur: Scalars['String'];
   dateEdition: Scalars['String'];
-  dispobible: Scalars['Boolean'];
+  disponible: Scalars['Boolean'];
   nbPret?: Maybe<Scalars['Int']>;
 };
 
@@ -41,8 +41,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   addLecteur: Lecteur;
   delLecteur: Scalars['Boolean'];
+  updateLecteur: Lecteur;
   addLivre: Livre;
   delLivre: Scalars['Boolean'];
+  updateLivre: Livre;
   addPret: Pret;
   delPret: Scalars['Boolean'];
 };
@@ -58,6 +60,12 @@ export type MutationDelLecteurArgs = {
 };
 
 
+export type MutationUpdateLecteurArgs = {
+  id: Scalars['String'];
+  nom: Scalars['String'];
+};
+
+
 export type MutationAddLivreArgs = {
   input: LivreInput;
 };
@@ -65,6 +73,12 @@ export type MutationAddLivreArgs = {
 
 export type MutationDelLivreArgs = {
   id: Scalars['String'];
+};
+
+
+export type MutationUpdateLivreArgs = {
+  id: Scalars['String'];
+  input: LivreInput;
 };
 
 
@@ -232,7 +246,7 @@ export type LivreResolvers<ContextType = any, ParentType extends ResolversParent
   design?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   auteur?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   dateEdition?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  dispobible?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  disponible?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   nbPret?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -240,8 +254,10 @@ export type LivreResolvers<ContextType = any, ParentType extends ResolversParent
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addLecteur?: Resolver<ResolversTypes['Lecteur'], ParentType, ContextType, RequireFields<MutationAddLecteurArgs, 'nom'>>;
   delLecteur?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelLecteurArgs, 'id'>>;
+  updateLecteur?: Resolver<ResolversTypes['Lecteur'], ParentType, ContextType, RequireFields<MutationUpdateLecteurArgs, 'id' | 'nom'>>;
   addLivre?: Resolver<ResolversTypes['Livre'], ParentType, ContextType, RequireFields<MutationAddLivreArgs, 'input'>>;
   delLivre?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelLivreArgs, 'id'>>;
+  updateLivre?: Resolver<ResolversTypes['Livre'], ParentType, ContextType, RequireFields<MutationUpdateLivreArgs, 'id' | 'input'>>;
   addPret?: Resolver<ResolversTypes['Pret'], ParentType, ContextType, RequireFields<MutationAddPretArgs, 'input'>>;
   delPret?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelPretArgs, 'id'>>;
 };

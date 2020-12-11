@@ -14,7 +14,7 @@ const livre: LivreFR = async ({ id }) => {
     design: livre.design,
     auteur: livre.auteur,
     dateEdition: livre.dateEdition.toString(),
-    dispobible: livre.disponible,
+    disponible: livre.disponible,
   }
 }
 

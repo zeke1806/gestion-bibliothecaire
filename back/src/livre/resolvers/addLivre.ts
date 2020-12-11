@@ -15,6 +15,6 @@ export const addLivre: T = async (_, { input }) => {
       design: result.design,
       auteur: result.auteur,
       dateEdition: result.dateEdition.toString(),
-      dispobible: result.disponible,
+      disponible: result.disponible,
   };
 }
