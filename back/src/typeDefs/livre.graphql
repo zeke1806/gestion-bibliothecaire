@@ -5,7 +5,7 @@ type Livre {
   auteur: String!
   dateEdition: String!
   dispobible: Boolean!
-  nbPret: Int!
+  nbPret: Int
 }
 
 input LivreInput {

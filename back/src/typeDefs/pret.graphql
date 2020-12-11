@@ -1,6 +1,6 @@
 type Pret {
   id: String!
-  livre: Livre!
+  livre: Livre
   datePret: String!
 }
 

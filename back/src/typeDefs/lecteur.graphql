@@ -2,5 +2,5 @@ type Lecteur {
   # numLecteur
   id: ID!
   nom: String!
-  prets: [Pret!]!
+  prets: [Pret]
 }

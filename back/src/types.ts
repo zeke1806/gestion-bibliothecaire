@@ -16,7 +16,7 @@ export type Lecteur = {
   /** numLecteur */
   id: Scalars['ID'];
   nom: Scalars['String'];
-  prets: Array<Pret>;
+  prets?: Maybe<Array<Maybe<Pret>>>;
 };
 
 export type Livre = {
@@ -27,7 +27,7 @@ export type Livre = {
   auteur: Scalars['String'];
   dateEdition: Scalars['String'];
   dispobible: Scalars['Boolean'];
-  nbPret: Scalars['Int'];
+  nbPret?: Maybe<Scalars['Int']>;
 };
 
 export type LivreInput = {
@@ -39,19 +39,12 @@ export type LivreInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  login?: Maybe<Token>;
   addLecteur: Lecteur;
   delLecteur: Scalars['Boolean'];
   addLivre: Livre;
   delLivre: Scalars['Boolean'];
   addPret: Pret;
   delPret: Scalars['Boolean'];
-};
-
-
-export type MutationLoginArgs = {
-  username: Scalars['String'];
-  password: Scalars['String'];
 };
 
 
@@ -87,7 +80,7 @@ export type MutationDelPretArgs = {
 export type Pret = {
   __typename?: 'Pret';
   id: Scalars['String'];
-  livre: Livre;
+  livre?: Maybe<Livre>;
   datePret: Scalars['String'];
 };
 
@@ -230,7 +223,7 @@ export type ResolversParentTypes = {
 export type LecteurResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lecteur'] = ResolversParentTypes['Lecteur']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   nom?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  prets?: Resolver<Array<ResolversTypes['Pret']>, ParentType, ContextType>;
+  prets?: Resolver<Maybe<Array<Maybe<ResolversTypes['Pret']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -240,12 +233,11 @@ export type LivreResolvers<ContextType = any, ParentType extends ResolversParent
   auteur?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   dateEdition?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   dispobible?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  nbPret?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  nbPret?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  login?: Resolver<Maybe<ResolversTypes['Token']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'username' | 'password'>>;
   addLecteur?: Resolver<ResolversTypes['Lecteur'], ParentType, ContextType, RequireFields<MutationAddLecteurArgs, 'nom'>>;
   delLecteur?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelLecteurArgs, 'id'>>;
   addLivre?: Resolver<ResolversTypes['Livre'], ParentType, ContextType, RequireFields<MutationAddLivreArgs, 'input'>>;
@@ -256,7 +248,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type PretResolvers<ContextType = any, ParentType extends ResolversParentTypes['Pret'] = ResolversParentTypes['Pret']> = {
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  livre?: Resolver<ResolversTypes['Livre'], ParentType, ContextType>;
+  livre?: Resolver<Maybe<ResolversTypes['Livre']>, ParentType, ContextType>;
   datePret?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
