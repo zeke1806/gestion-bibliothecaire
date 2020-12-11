@@ -1,21 +1,25 @@
-import { Column, Entity, JoinColumn, ManyToOne, RelationId } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, RelationId } from "typeorm";
 import { LecteurEntity } from "../lecteur/lecteur.entity";
 import { LivreEntity } from "../livre/livre.entity";
 
 @Entity({ name: "pret" })
 export class PretEntity {
-  @ManyToOne(() => LecteurEntity, {primary: true})
+  @PrimaryGeneratedColumn()
+  id: number;
+  
+  @Column({name: 'date_pret'})
+  datePret: Date;
+
+  @ManyToOne(() => LecteurEntity)
   @JoinColumn({name: 'lecteur'})
   lecteur: LecteurEntity;
   @RelationId((pret: PretEntity) => pret.lecteur)
   lecteurId: number;
 
-  @ManyToOne(() => LivreEntity, {primary: true})
+  @ManyToOne(() => LivreEntity)
   @JoinColumn({name: 'livre'})
   livre: LivreEntity
   @RelationId((pret: PretEntity) => pret.livre)
   livreId: number;
 
-  @Column()
-  datePret: Date;
 }

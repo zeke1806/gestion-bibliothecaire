@@ -2,8 +2,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "livre" })
 export class LivreEntity {
-  @PrimaryGeneratedColumn()
-  numLivre: number;
+  @PrimaryGeneratedColumn({ name: 'num_livre' })
+  numLivre: number; 
 
   @Column()
   design: string;
@@ -11,7 +11,7 @@ export class LivreEntity {
   @Column()
   auteur: string;
 
-  @Column()
+  @Column({ name: 'date_edition' })
   dateEdition: Date
 
   @Column()

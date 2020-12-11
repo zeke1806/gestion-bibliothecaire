@@ -1,4 +1,11 @@
 type Pret {
+  id: String!
   livre: Livre!
+  datePret: String!
+}
+
+input PretInput {
+  lecteurId: String!
+  livreId: String!
   datePret: String!
 }

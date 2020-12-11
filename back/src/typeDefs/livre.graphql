@@ -7,3 +7,10 @@ type Livre {
   dispobible: Boolean!
   nbPret: Int!
 }
+
+input LivreInput {
+  design: String!
+  auteur: String!
+  dateEdition: String!
+  disponible: Boolean!
+}
