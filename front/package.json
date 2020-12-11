@@ -32,6 +32,7 @@
     "expo-status-bar": "~1.0.3",
     "expo-web-browser": "~8.6.0",
     "graphql": "^15.4.0",
+    "graphql-normalizr": "^2.10.1",
     "immer": "^8.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",

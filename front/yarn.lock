@@ -4853,6 +4853,11 @@ graphql-config@^3.2.0:
     string-env-interpolation "1.0.1"
     tslib "^2.0.0"
 
+graphql-normalizr@^2.10.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/graphql-normalizr/-/graphql-normalizr-2.10.1.tgz#ad3a5375266d0e5621f084f655c7776dc0bdb663"
+  integrity sha512-9ySLeOL1rpfjdgHQC3rVd/tLLMWqW8rui6F95rCd0ex73fXM/goEgf1/lhuyeFZlAy/sldWCoDs1tjdB+dNAZQ==
+
 graphql-request@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-3.3.0.tgz#1b9003f34b73cd40d691803d2d422fde5c713af3"
