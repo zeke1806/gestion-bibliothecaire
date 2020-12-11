@@ -14,6 +14,7 @@ const app = express();
 
 const server = new ApolloServer({
   schema,
+  mocks: true,
   validationRules: [depthLimit(7)],
   context: ({ req, res }) => ({ req, res }),
 });

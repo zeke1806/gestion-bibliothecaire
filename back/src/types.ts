@@ -11,9 +11,41 @@ export type Scalars = {
   Float: number;
 };
 
+export type Lecteur = {
+  __typename?: 'Lecteur';
+  /** numLecteur */
+  id: Scalars['ID'];
+  nom: Scalars['String'];
+  prets: Array<Pret>;
+};
+
+export type Livre = {
+  __typename?: 'Livre';
+  /** numLivre */
+  id: Scalars['ID'];
+  design: Scalars['String'];
+  auteur: Scalars['String'];
+  dateEdition: Scalars['String'];
+  dispobible: Scalars['Boolean'];
+  nbPret: Scalars['Int'];
+};
+
+export type LivreInput = {
+  design: Scalars['String'];
+  auteur: Scalars['String'];
+  dateEdition: Scalars['String'];
+  disponible: Scalars['Boolean'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   login?: Maybe<Token>;
+  addLecteur: Lecteur;
+  delLecteur: Scalars['Boolean'];
+  addLivre: Livre;
+  delLivre: Scalars['Boolean'];
+  addPret: Pret;
+  delPret: Scalars['Boolean'];
 };
 
 
@@ -22,11 +54,54 @@ export type MutationLoginArgs = {
   password: Scalars['String'];
 };
 
+
+export type MutationAddLecteurArgs = {
+  nom: Scalars['String'];
+};
+
+
+export type MutationDelLecteurArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationAddLivreArgs = {
+  input: LivreInput;
+};
+
+
+export type MutationDelLivreArgs = {
+  id: Scalars['String'];
+};
+
+
+export type MutationAddPretArgs = {
+  input: PretInput;
+};
+
+
+export type MutationDelPretArgs = {
+  id: Scalars['String'];
+};
+
+export type Pret = {
+  __typename?: 'Pret';
+  id: Scalars['String'];
+  livre: Livre;
+  datePret: Scalars['String'];
+};
+
+export type PretInput = {
+  lecteurId: Scalars['String'];
+  livreId: Scalars['String'];
+  datePret: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   helloWorld: Scalars['String'];
-  users: Array<User>;
-  me: User;
+  lecteurs: Array<Lecteur>;
+  livres: Array<Livre>;
 };
 
 export type User = {
@@ -118,34 +193,78 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Mutation: ResolverTypeWrapper<{}>;
+  Lecteur: ResolverTypeWrapper<Lecteur>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Livre: ResolverTypeWrapper<Livre>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  LivreInput: LivreInput;
+  Mutation: ResolverTypeWrapper<{}>;
+  Pret: ResolverTypeWrapper<Pret>;
+  PretInput: PretInput;
   Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<User>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Token: ResolverTypeWrapper<Token>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Mutation: {};
+  Lecteur: Lecteur;
+  ID: Scalars['ID'];
   String: Scalars['String'];
+  Livre: Livre;
+  Boolean: Scalars['Boolean'];
+  Int: Scalars['Int'];
+  LivreInput: LivreInput;
+  Mutation: {};
+  Pret: Pret;
+  PretInput: PretInput;
   Query: {};
   User: User;
   Float: Scalars['Float'];
   Token: Token;
-  Boolean: Scalars['Boolean'];
+};
+
+export type LecteurResolvers<ContextType = any, ParentType extends ResolversParentTypes['Lecteur'] = ResolversParentTypes['Lecteur']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  nom?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  prets?: Resolver<Array<ResolversTypes['Pret']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type LivreResolvers<ContextType = any, ParentType extends ResolversParentTypes['Livre'] = ResolversParentTypes['Livre']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  design?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  auteur?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  dateEdition?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  dispobible?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  nbPret?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   login?: Resolver<Maybe<ResolversTypes['Token']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'username' | 'password'>>;
+  addLecteur?: Resolver<ResolversTypes['Lecteur'], ParentType, ContextType, RequireFields<MutationAddLecteurArgs, 'nom'>>;
+  delLecteur?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelLecteurArgs, 'id'>>;
+  addLivre?: Resolver<ResolversTypes['Livre'], ParentType, ContextType, RequireFields<MutationAddLivreArgs, 'input'>>;
+  delLivre?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelLivreArgs, 'id'>>;
+  addPret?: Resolver<ResolversTypes['Pret'], ParentType, ContextType, RequireFields<MutationAddPretArgs, 'input'>>;
+  delPret?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDelPretArgs, 'id'>>;
+};
+
+export type PretResolvers<ContextType = any, ParentType extends ResolversParentTypes['Pret'] = ResolversParentTypes['Pret']> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  livre?: Resolver<ResolversTypes['Livre'], ParentType, ContextType>;
+  datePret?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   helloWorld?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
-  me?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  lecteurs?: Resolver<Array<ResolversTypes['Lecteur']>, ParentType, ContextType>;
+  livres?: Resolver<Array<ResolversTypes['Livre']>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -160,7 +279,10 @@ export type TokenResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type Resolvers<ContextType = any> = {
+  Lecteur?: LecteurResolvers<ContextType>;
+  Livre?: LivreResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Pret?: PretResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
   Token?: TokenResolvers<ContextType>;
