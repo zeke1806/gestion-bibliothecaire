@@ -1,12 +1,12 @@
 import { ConnectionOptions } from "typeorm";
 
 const configsDev: ConnectionOptions = {
-  type: "postgres",
+  type: "mysql",
   name: "default",
   host: "localhost",
-  port: 5432,
-  username: "postgres",
-  password: "root",
+  port: 3306,
+  username: "root",
+  password: "",
   database: "gestion-evenement",
   entities: ["src/**/*.entity{.ts,.js}"],
   synchronize: false,

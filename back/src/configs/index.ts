@@ -18,7 +18,7 @@ export default {
   },
 
   database: {
-    type: "postgres",
+    type: "mysql",
     name: "default",
     host: process.env.TYPEORM_HOST,
     port: parseInt(String(process.env.TYPEORM_PORT)),

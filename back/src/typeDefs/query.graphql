@@ -1,5 +1,5 @@
 type Query {
   helloWorld: String!
-  users: [User!]!
-  me: User!
+  lecteurs: [Lecteur!]!
+  livres: [Livre!]!
 }
