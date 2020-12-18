@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import { lecteurs } from "../api/lecteur";
-//@ts-ignore
-import { GraphQLNormalizr } from 'graphql-normalizr'
-import { useNLecteur } from "../store/normalized/lecteur";
+import { useNormalized } from "../store/normalized";
+import { useLecteurs } from "../store/lecteurs";
 
 export const useGetLecteurs = () => {
-  const { actions } = useNLecteur();
+  const { actions } = useNormalized();
+  const { actions: lecteursActions } = useLecteurs();
   useEffect(() => {
     const asyncFunc = async () => {
-      const normalizer = new GraphQLNormalizr();
       const result = await lecteurs();
-      const normalizedResult = normalizer.normalize(result);
-      actions.set(normalizedResult);
+      actions.set(result);
+      lecteursActions.set(result.data.lecteurs.map(l => l.id));
     };
     asyncFunc();
   }, [])
