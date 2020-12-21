@@ -1,13 +1,13 @@
 import React, { FC } from "react";
-import { useCreateLivre } from "../../services/createLivre";
+import { useAddLivre } from "../../services/addLivre";
 import FormLivre from "./FormLivre";
 
 const AddLivre: FC = () => {
-  const { form, handleChange, submit } = useCreateLivre();
+  const { form, handleChange, submit } = useAddLivre();
   return (
     <FormLivre
       type="add"
-      value={form}
+      value={form.input}
       onChange={handleChange}
       submit={submit}
     />

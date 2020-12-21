@@ -1,27 +1,26 @@
+import { useMutation } from "@apollo/client";
 import { useImmer } from "use-immer";
-import { IFormLecteur, ILecteur } from "../types";
+import { UpdateLecteurData, UPDATE_LECTEUR } from "../api/gqls/lecteur";
+import { MutationUpdateLecteurArgs } from "../api/types";
 
-export const useUpdateLecteur = (initialData: ILecteur) => {
-  const [form, setForm] = useImmer<IFormLecteur>({
-    nom: initialData.nom,
-  });
+export const useUpdateLecteur = (initialData: MutationUpdateLecteurArgs) => {
+  const [form, setForm] = useImmer<MutationUpdateLecteurArgs>(initialData);
+  const [updateLecteur, { loading }] = useMutation<UpdateLecteurData, MutationUpdateLecteurArgs>(UPDATE_LECTEUR);
 
-  const handleChange = (key: keyof IFormLecteur, value: string) => {
+  const handleChange = (key: 'nom', value: string) => {
     setForm((draft) => {
       draft[key] = value;
     });
   };
 
   const submit = async () => {
-    alert(initialData.idLecteur + " " + form.nom);
-    setForm((draft) => {
-      draft.nom = "";
-    });
+    updateLecteur({variables: form});
   };
 
   return {
     form,
     handleChange,
     submit,
+    loading
   };
 };

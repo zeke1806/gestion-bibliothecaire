@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { useCreateLecteur } from "../../services/createLecteur";
+import { useAddLecteur } from "../../services/addLecteur";
 import FormLecteur from "./FormLecteur";
 
 const AddLecteur: FC = () => {
-  const { form, handleChange, submit } = useCreateLecteur();
+  const { form, handleChange, submit } = useAddLecteur();
   return (
     <FormLecteur
       type="add"

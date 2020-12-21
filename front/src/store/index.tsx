@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { LecteurProvider } from "./lecteurs";
-import { NormalizedProvider } from "./normalized";
+
+const Fake: FC = ({children}) => <>{children}</>;
 
 export const StoreProvider: FC<any> = ({children}) => {
-  return [NormalizedProvider, LecteurProvider].reduce((acc, Cur) => {
+  return [Fake].reduce((acc, Cur) => {
     return <Cur>
       {acc}
     </Cur>

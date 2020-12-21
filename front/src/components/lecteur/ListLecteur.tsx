@@ -4,8 +4,6 @@ import React, { FC } from "react";
 import { TouchableOpacity, View, Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import tailwind from "tailwind-rn";
-import { useLecteurs } from "../../store/lecteurs";
-import { useNormalized } from "../../store/normalized";
 import themes from "../../theme";
 import { ILecteur } from "../../types";
 import SectionTitle from "../public/SectionTitle";
@@ -48,7 +46,6 @@ const ListItem: FC<{
 };
 
 const ListLecteur: FC = () => {
-  const { state } = useLecteurs();
   
   const renderItem = ({ item }: { item: ILecteur }) => {
     return <ListItem item={item} />;

@@ -2,13 +2,17 @@ import React, { FC } from "react";
 import FormLecteur from "./FormLecteur";
 import { useRoute } from "@react-navigation/native";
 import Space from "../public/Space";
-import { ILecteur } from "../../types";
 import { useUpdateLecteur } from "../../services/updateLecteur";
+import { Lecteur } from "../../api/types";
 
 const UpdateLecteur: FC = () => {
-  const toUpdateLecteur = useRoute().params as ILecteur;
+  const toUpdateLecteur = useRoute().params as Lecteur;
 
-  const { form, handleChange, submit } = useUpdateLecteur(toUpdateLecteur);
+  const { form, handleChange, submit } = useUpdateLecteur({
+    id: toUpdateLecteur.id,
+    nom: toUpdateLecteur.nom
+  });
+  
   return (
     <>
       <Space />
