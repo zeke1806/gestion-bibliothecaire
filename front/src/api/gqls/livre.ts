@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client';
-import { LIVRE_FRAG } from '../fragments';
-import { Livre } from '../types';
+import { gql } from "@apollo/client";
+import { LIVRE_FRAG } from "../fragments";
+import { Livre } from "../types";
 
 // Livres
 
@@ -24,8 +24,8 @@ export interface AddLivreData {
 }
 
 export const ADD_LIVRE = gql`
-  mutation AddLivre ($input: LivreInput!) {
-    addLivre (input: $input) {
+  mutation AddLivre($input: LivreInput!) {
+    addLivre(input: $input) {
       ...LivreFrag
     }
   }
@@ -39,7 +39,22 @@ export interface DelLivreData {
 }
 
 export const DEL_LIVRE = gql`
-  mutation DelLivre ($id: String!) {
-    delLivre(id: $id)  
+  mutation DelLivre($id: String!) {
+    delLivre(id: $id)
   }
+`;
+
+// Update Livre
+
+export interface UpdateLivreData {
+  updateLivre: Livre;
+}
+
+export const UPDATE_LIVRE = gql`
+  mutation UpdateLivre($id: String!, $input: LivreInput!) {
+    updateLivre(id: $id, input: $input) {
+      ...LivreFrag
+    }
+  }
+  ${LIVRE_FRAG}
 `;

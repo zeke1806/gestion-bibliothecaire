@@ -1,33 +1,41 @@
 import { useMutation } from "@apollo/client";
 import produce from "immer";
-import { DelLecteurData, DEL_LECTEUR, LECTEURS, LecteursData } from "../api/gqls/lecteur";
+import {
+  DelLecteurData,
+  DEL_LECTEUR,
+  LECTEURS,
+  LecteursData,
+} from "../api/gqls/lecteur";
 import { MutationDelLecteurArgs } from "../api/types";
 
 export const useDelLecteur = (variables: MutationDelLecteurArgs) => {
-  const [delLecteur, { loading }] = useMutation<DelLecteurData, MutationDelLecteurArgs>(DEL_LECTEUR, {
+  const [delLecteur, { loading }] = useMutation<
+    DelLecteurData,
+    MutationDelLecteurArgs
+  >(DEL_LECTEUR, {
     update(cache) {
       const lecteursData = cache.readQuery<LecteursData>({
-        query: LECTEURS
+        query: LECTEURS,
       });
-      if(lecteursData) {
+      if (lecteursData) {
         cache.writeQuery({
           query: LECTEURS,
-          data: produce(lecteursData, draft => {
+          data: produce(lecteursData, (draft) => {
             draft.lecteurs.splice(
-              draft.lecteurs.findIndex(elt => elt.id === variables.id)
+              draft.lecteurs.findIndex((elt) => elt.id === variables.id)
             );
-          })
-        })
+          }),
+        });
       }
-    }
+    },
   });
-  
+
   const submit = () => {
-    delLecteur({variables})
+    delLecteur({ variables });
   };
 
   return {
     loading,
-    submit
-  }
-}
+    submit,
+  };
+};

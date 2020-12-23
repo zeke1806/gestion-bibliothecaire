@@ -5,22 +5,25 @@ import { MutationUpdateLecteurArgs } from "../api/types";
 
 export const useUpdateLecteur = (initialData: MutationUpdateLecteurArgs) => {
   const [form, setForm] = useImmer<MutationUpdateLecteurArgs>(initialData);
-  const [updateLecteur, { loading }] = useMutation<UpdateLecteurData, MutationUpdateLecteurArgs>(UPDATE_LECTEUR);
+  const [updateLecteur, { loading }] = useMutation<
+    UpdateLecteurData,
+    MutationUpdateLecteurArgs
+  >(UPDATE_LECTEUR);
 
-  const handleChange = (key: 'nom', value: string) => {
+  const handleChange = (key: "nom", value: string) => {
     setForm((draft) => {
       draft[key] = value;
     });
   };
 
   const submit = async () => {
-    updateLecteur({variables: form});
+    updateLecteur({ variables: form });
   };
 
   return {
     form,
     handleChange,
     submit,
-    loading
+    loading,
   };
 };

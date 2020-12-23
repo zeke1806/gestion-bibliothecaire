@@ -1,15 +1,16 @@
+import { useMutation } from "@apollo/client";
 import { useImmer } from "use-immer";
-import { IFormLecteur, IFormLivre, ILivre } from "../types";
+import { UpdateLivreData, UPDATE_LIVRE } from "../api/gqls/livre";
+import { LivreInput, MutationUpdateLivreArgs } from "../api/types";
 
-export const useUpdateLivre = (initialData: ILivre) => {
-  const [form, setForm] = useImmer<IFormLivre>({
-    design: initialData.design,
-    auteur: initialData.auteur,
-    dateEdition: initialData.dateEdition,
-    disponible: initialData.disponible,
-  });
+export const useUpdateLivre = (initialData: MutationUpdateLivreArgs) => {
+  const [form, setForm] = useImmer<LivreInput>(initialData.input);
+  const [updateLivre, { loading }] = useMutation<
+    UpdateLivreData,
+    MutationUpdateLivreArgs
+  >(UPDATE_LIVRE);
 
-  const handleChange = (key: keyof IFormLivre, value: string) => {
+  const handleChange = (key: keyof LivreInput, value: string) => {
     if (key === "dateEdition") {
       setForm((draft) => {
         draft.dateEdition = value;
@@ -26,22 +27,13 @@ export const useUpdateLivre = (initialData: ILivre) => {
   };
 
   const submit = async () => {
-    alert(
-      initialData.idLivre +
-        " design: " +
-        form.design +
-        " auteur: " +
-        form.auteur +
-        " " +
-        form.disponible +
-        " " +
-        form.dateEdition
-    );
+    updateLivre({ variables: { id: initialData.id, input: form } });
   };
 
   return {
     form,
     handleChange,
     submit,
+    loading,
   };
 };

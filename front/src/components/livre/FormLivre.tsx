@@ -2,16 +2,16 @@ import React, { FC } from "react";
 import { Button, View, Text } from "react-native";
 import tailwind from "tailwind-rn";
 import themes from "../../theme";
-import { IFormLecteur, IFormLivre } from "../../types";
 import DatePicker from "../public/DatePicker";
 import MyTextInput from "../public/MyTextInput";
 import SectionTitle from "../public/SectionTitle";
 import Checkbox from "expo-checkbox";
+import { LivreInput } from "../../api/types";
 
 const FormLivre: FC<{
   type: "add" | "update";
-  value: IFormLivre;
-  onChange: (key: keyof IFormLivre, value: string) => void;
+  value: LivreInput;
+  onChange: (key: keyof LivreInput, value: string) => void;
   submit: () => void;
 }> = ({ type, value, onChange, submit }) => {
   return (

@@ -1,19 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import React, { FC } from "react";
-import { TouchableOpacity, View, Text } from "react-native";
+import { TouchableOpacity, View, Text, ActivityIndicator } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import tailwind from "tailwind-rn";
+import { Livre } from "../../api/types";
+import { useDelLivre } from "../../services/delLivre";
+import { uselivres } from "../../services/livres";
 import themes from "../../theme";
 import { ILivre } from "../../types";
 import { formatDate } from "../../utils";
 import SectionTitle from "../public/SectionTitle";
 
 const ListItem: FC<{
-  item: ILivre;
+  item: Livre;
 }> = ({ item }) => {
   const navigation = useNavigation();
-  //const {submit} = useDeleteLecteur(item.idLecteur);
+  const { submit } = useDelLivre(item);
 
   const navigateToUpdate = () => {
     navigation.navigate("update-livre", item);
@@ -31,8 +34,9 @@ const ListItem: FC<{
           style={tailwind("mr-5")}
         />
         <View>
-          <Text>Numero: {item.idLivre}</Text>
+          <Text>Numero: {item.id}</Text>
           <Text>Design: {item.design}</Text>
+          <Text>Auteur: {item.auteur}</Text>
           <Text>Date d'édition: {formatDate(item.dateEdition)}</Text>
           <Text>Disponible: {item.disponible ? "oui" : "non"}</Text>
         </View>
@@ -42,44 +46,33 @@ const ListItem: FC<{
         size={themes.space * 2}
         style={tailwind("mr-5")}
         color="red"
-        //onPress={submit}
+        onPress={submit}
       />
     </TouchableOpacity>
   );
 };
 
 const ListLivre: FC = () => {
-  const renderItem = ({ item }: { item: ILivre }) => {
+  const { livres, loading } = uselivres();
+
+  const renderItem = ({ item }: { item: Livre }) => {
     return <ListItem item={item} />;
   };
+
+  if (loading) {
+    return <ActivityIndicator size="large" color={themes.colors.secondary} />;
+  }
 
   return (
     <>
       <SectionTitle iconName="list" text="List de livre" />
       <FlatList
-        data={data}
+        data={livres}
         renderItem={renderItem}
-        keyExtractor={(item) => String(item.idLivre)}
+        keyExtractor={(item) => String(item.id)}
       />
     </>
   );
 };
 
 export default ListLivre;
-
-const data = [
-  {
-    idLivre: 1,
-    design: "des",
-    auteur: "aut",
-    disponible: false,
-    dateEdition: "2005-09-12T21:53:45.266Z",
-  },
-  {
-    idLivre: 2,
-    design: "de2",
-    auteur: "aut2",
-    disponible: true,
-    dateEdition: "2002-09-12T21:53:45.266Z",
-  },
-];

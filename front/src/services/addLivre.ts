@@ -11,24 +11,28 @@ export const useAddLivre = () => {
       auteur: "",
       dateEdition: new Date().toString(),
       disponible: true,
-    }
+    },
   });
-  const [addLivre, { loading }] = useMutation<AddLivreData, MutationAddLivreArgs>(ADD_LIVRE, {
+  const [addLivre, { loading }] = useMutation<
+    AddLivreData,
+    MutationAddLivreArgs
+  >(ADD_LIVRE, {
     update(cache, { data }) {
-      if(data) {
+      if (data) {
         cache.modify({
           fields: {
-            livres(existingLivres ) {
+            livres(existingLivres) {
               const newLivreRef = cache.writeFragment({
+                fragmentName: "LivreFrag",
                 data: data.addLivre,
-                fragment: LIVRE_FRAG
+                fragment: LIVRE_FRAG,
               });
-              return [newLivreRef, ...existingLivres]
-            }
-          }
-        })
+              return [newLivreRef, ...existingLivres];
+            },
+          },
+        });
       }
-    }
+    },
   });
 
   const handleChange = (key: keyof LivreInput, value: string) => {
@@ -48,13 +52,13 @@ export const useAddLivre = () => {
   };
 
   const submit = async () => {
-    addLivre({variables: form})
+    addLivre({ variables: form });
   };
 
   return {
     form,
     submit,
     handleChange,
-    loading
+    loading,
   };
 };
