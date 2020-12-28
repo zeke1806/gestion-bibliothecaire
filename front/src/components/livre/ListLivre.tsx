@@ -8,7 +8,6 @@ import { Livre } from "../../api/types";
 import { useDelLivre } from "../../services/delLivre";
 import { uselivres } from "../../services/livres";
 import themes from "../../theme";
-import { ILivre } from "../../types";
 import { formatDate } from "../../utils";
 import SectionTitle from "../public/SectionTitle";
 
