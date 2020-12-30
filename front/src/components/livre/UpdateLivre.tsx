@@ -4,6 +4,7 @@ import Space from "../public/Space";
 import FormLivre from "./FormLivre";
 import { useUpdateLivre } from "../../services/updateLivre";
 import { Livre } from "../../api/types";
+import Stat from "./Stat";
 
 const UpdateLivre: FC = () => {
   const toUpdateLivre = useRoute().params as Livre;
@@ -27,6 +28,8 @@ const UpdateLivre: FC = () => {
         onChange={handleChange}
         submit={submit}
       />
+      <Space />
+      <Stat nbPret={toUpdateLivre.nbPret} />
     </>
   );
 };
